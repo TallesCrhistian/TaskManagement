@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.Application.Enumerators
+﻿namespace TaskManagement.Domain.Enumerators
 {
     public enum EnumTaskStatus
     {        

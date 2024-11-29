@@ -1,4 +1,4 @@
-﻿using TaskManagement.Application.Enumerators;
+﻿using TaskManagement.Domain.Enumerators;
 
 namespace TaskManagement.Application.ViewModels.Task
 {

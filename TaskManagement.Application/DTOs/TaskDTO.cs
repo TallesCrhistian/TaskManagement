@@ -1,4 +1,6 @@
-﻿namespace TaskManagement.Application.DTOs
+﻿using TaskManagement.Domain.Enumerators;
+
+namespace TaskManagement.Application.DTOs
 {
     public class TaskDTO : BaseEntityDTO
     {
@@ -6,6 +8,6 @@
 
         public string? Description { get; set; }
 
-        public int Status { get; set; }
+        public EnumTaskStatus Status { get; set; }
     }
 }
