@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.Domain.DTOs
+﻿namespace TaskManagement.Application.DTOs
 {
     public class BaseEntityDTO
     {

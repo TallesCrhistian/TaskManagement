@@ -2,7 +2,7 @@
 using TaskManagement.Application.DTOs;
 using TaskManagement.Domain.Entities;
 
-namespace TaskManagement.Utils.MappingProfiles
+namespace TaskManagement.API.MappingProfiles
 {
     public class MappingProfile : Profile
     {
