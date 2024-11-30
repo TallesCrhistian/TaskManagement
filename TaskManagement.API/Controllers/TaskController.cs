@@ -82,7 +82,7 @@ namespace TaskManagement.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ServiceResponseDTO<TaskViewModel>))]       
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {         
             ServiceResponseDTO<TaskViewModel> serviceResponseViewModel = await this._iTaskServices.Delete(id);
 

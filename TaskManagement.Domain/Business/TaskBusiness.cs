@@ -9,18 +9,28 @@ namespace TaskManagement.Domain.Business
 {
     public class TaskBusiness : ITaskBusiness
     {
-        public void Create(TaskEntity taskEntity)
+        public TaskEntity Create(TaskEntity taskEntity)
         {
-            ValidateIfTaskIsCompleted(taskEntity); 
+            ValidateIfTaskIsCompleted(taskEntity);
+
+            if (taskEntity.Status != EnumTaskStatus.Completed)
+                taskEntity.UpdatedAt = null;
             
             ValidateIfCreatedAtIsInvalid(taskEntity);
+
+            return taskEntity;
         }
 
-        public void Update(TaskEntity newTaskEntity)
+        public TaskEntity Update(TaskEntity newTaskEntity)
         {
             ValidateIfTaskIsCompleted(newTaskEntity);
 
-            ValidateIfCreatedAtIsInvalid(newTaskEntity);           
+            if (newTaskEntity.Status != EnumTaskStatus.Completed)
+                newTaskEntity.UpdatedAt = null;
+
+            ValidateIfCreatedAtIsInvalid(newTaskEntity);     
+            
+            return newTaskEntity;
         }
 
         private void ValidateIfTaskIsCompleted(TaskEntity taskEntity)
@@ -39,6 +49,6 @@ namespace TaskManagement.Domain.Business
         {
             if (taskEntity.CreatedAt > DateTime.Now)
                 throw new CustomException(HttpStatusCode.BadRequest, Messages.CreatedAtInvalid, new HttpRequestException());
-        }
+        }        
     }
 }

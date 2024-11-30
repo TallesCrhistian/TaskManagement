@@ -53,9 +53,9 @@ namespace TaskManagement.Application.Services
 
                 ValidateTitle(taskDTO);                
 
-                TaskEntity taskEntity = _iMapper.Map<TaskEntity>(taskDTO);  
-                
-                _iTaskBusiness.Create(taskEntity);
+                TaskEntity taskEntity = _iMapper.Map<TaskEntity>(taskDTO);
+
+                taskEntity = _iTaskBusiness.Create(taskEntity);
 
                 taskEntity = await _iBaseRepository.Create(taskEntity);
 
@@ -95,8 +95,7 @@ namespace TaskManagement.Application.Services
             {
                 TaskDTO taskDTO = await ValidateIfTaskExistsAsync(id);
 
-                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(taskDTO);
-                serviceResponseDTO.StatusCode = StatusCodes.Status201Created;
+                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(taskDTO);                
             }
             catch (CustomException ex)
             {
@@ -129,12 +128,11 @@ namespace TaskManagement.Application.Services
                 TaskEntity newTaskEntity = _iMapper.Map<TaskEntity>(taskDTO);
                 TaskEntity oldTaskEntity = _iMapper.Map<TaskEntity>(oldTaskDTO);
 
-                _iTaskBusiness.Update(newTaskEntity);
+                newTaskEntity = _iTaskBusiness.Update(newTaskEntity);
 
                 newTaskEntity = await _iBaseRepository.Update(newTaskEntity);
 
-                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(newTaskEntity);
-                serviceResponseDTO.StatusCode = StatusCodes.Status201Created;
+                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(newTaskEntity);                
 
                 await this._iWorkUnit.SaveChangesAsync();
                 await this._iWorkUnit.CommitAsync();
@@ -209,14 +207,16 @@ namespace TaskManagement.Application.Services
 
                 List<TaskEntity> taskEntities = await this._iTaskRepository.List(taskEntity, pageForIndex);               
 
-                List<TaskViewModel> TaskDTOList = taskEntities.Count != 0 ? this._iMapper.Map<List<TaskViewModel>>(taskEntities)
+                List<TaskViewModel> taskDTOList = taskEntities.Count != 0 ? this._iMapper.Map<List<TaskViewModel>>(taskEntities)
                      : throw new CustomException(HttpStatusCode.NotFound, Messages.NotFound(EntityName), new HttpRequestException());                          
 
                 ListResponseDTO<TaskViewModel> dataResponse = new ListResponseDTO<TaskViewModel>()
                 {
-                    Data = TaskDTOList,
+                    Data = taskDTOList,
                     TotalPages = await GetTotalPages(taskEntity),
                 };
+
+                serviceResponseDTO.GenericData = dataResponse;               
             }
             catch (CustomException ex)
             {
@@ -247,7 +247,7 @@ namespace TaskManagement.Application.Services
         {
             TaskEntity taskEntity = await _iBaseRepository.Read<TaskEntity>(id);
 
-            return taskEntity is null ? _iMapper.Map<TaskDTO>(taskEntity)
+            return taskEntity is not null ? _iMapper.Map<TaskDTO>(taskEntity)
                : throw new CustomException(HttpStatusCode.BadRequest, Messages.NotFound(EntityName), new HttpRequestException());
         }
 

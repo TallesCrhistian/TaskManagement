@@ -3,9 +3,9 @@
 namespace TaskManagement.Domain.Interfaces.Business
 {
     public interface ITaskBusiness
-    {        
-       void Update(TaskEntity newTaskEntity);
+    {
+        TaskEntity Update(TaskEntity newTaskEntity);
 
-        void Create(TaskEntity taskEntity);
+        TaskEntity Create(TaskEntity taskEntity);
     }
 }

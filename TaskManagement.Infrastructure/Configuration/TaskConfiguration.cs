@@ -36,7 +36,7 @@ namespace TaskManagement.Infrastructure.Configuration
 
                 entityTypeBuilder.Property(e => e.UpdatedAt)
                    .HasColumnName("updated_at")
-                   .IsRequired();
+                   .IsRequired(false);
             }
         }
     }
