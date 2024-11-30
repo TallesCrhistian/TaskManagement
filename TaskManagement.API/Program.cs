@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddSwaggerGen();
 builder.Services.WorkUnit();
 builder.Services.AddRepository();
