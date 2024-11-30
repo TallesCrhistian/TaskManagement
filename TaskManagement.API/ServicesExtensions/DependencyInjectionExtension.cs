@@ -1,5 +1,7 @@
 ﻿using TaskManagement.Application.Interfaces;
 using TaskManagement.Application.Services;
+using TaskManagement.Domain.Business;
+using TaskManagement.Domain.Interfaces.Business;
 
 namespace TaskManagement.API.ServicesExtensions
 {
@@ -13,7 +15,8 @@ namespace TaskManagement.API.ServicesExtensions
         }
 
         public static IServiceCollection AddBusiness(this IServiceCollection services)
-        {                 
+        {
+            services.AddScoped<ITaskBusiness, TaskBusiness>();
 
             return services;
         }

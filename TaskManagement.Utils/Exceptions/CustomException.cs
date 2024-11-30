@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace TaskManagement.Application.Exceptions
+namespace TaskManagement.Utils.Exceptions
 {
     public class CustomException : Exception
     {

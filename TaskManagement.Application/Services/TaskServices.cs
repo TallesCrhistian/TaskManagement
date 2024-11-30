@@ -11,6 +11,7 @@ using TaskManagement.Domain.Interfaces.Business;
 using TaskManagement.Domain.Interfaces.Repository;
 using TaskManagement.Utils;
 using TaskManagement.Utils.CustomMaths;
+using TaskManagement.Utils.Exceptions;
 using TaskManagement.Utils.Messages;
 
 namespace TaskManagement.Application.Services
@@ -54,7 +55,7 @@ namespace TaskManagement.Application.Services
 
                 TaskEntity taskEntity = _iMapper.Map<TaskEntity>(taskDTO);  
                 
-                taskEntity = await _iTaskBusiness.Create(taskEntity);
+                _iTaskBusiness.Create(taskEntity);
 
                 taskEntity = await _iBaseRepository.Create(taskEntity);
 
@@ -128,7 +129,7 @@ namespace TaskManagement.Application.Services
                 TaskEntity newTaskEntity = _iMapper.Map<TaskEntity>(taskDTO);
                 TaskEntity oldTaskEntity = _iMapper.Map<TaskEntity>(oldTaskDTO);
 
-                newTaskEntity =  await _iTaskBusiness.Update(newTaskEntity, oldTaskEntity); // validar se o enum é de concluida e atualizar a data
+                _iTaskBusiness.Update(newTaskEntity);
 
                 newTaskEntity = await _iBaseRepository.Update(newTaskEntity);
 
