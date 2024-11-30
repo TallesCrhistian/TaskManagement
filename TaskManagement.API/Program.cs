@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using TaskManagement.API.MappingProfiles;
 using TaskManagement.API.ServicesExtensions;
+using TaskManagement.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+    context.Database.Migrate();
+
+    await context.SaveChangesAsync();   
 }
 
 app.UseHttpsRedirection();

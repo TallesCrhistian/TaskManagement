@@ -59,7 +59,7 @@ namespace TaskManagement.Application.Services
 
                 taskEntity = await _iBaseRepository.Create(taskEntity);
 
-                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(taskDTO);
+                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(taskEntity);
                 serviceResponseDTO.StatusCode = StatusCodes.Status201Created;
 
                 await this._iWorkUnit.SaveChangesAsync();

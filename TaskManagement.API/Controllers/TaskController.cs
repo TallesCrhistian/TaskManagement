@@ -26,8 +26,7 @@ namespace TaskManagement.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
-        [Authorize]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ServiceResponseDTO<TaskViewModel>))]      
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TaskCreateViewModel taskCreateViewModel)
         {         
@@ -45,8 +44,7 @@ namespace TaskManagement.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
-        [Authorize]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ServiceResponseDTO<TaskViewModel>))]       
         [HttpGet("{id}")]
         public async Task<IActionResult> Read(Guid id)
         {
