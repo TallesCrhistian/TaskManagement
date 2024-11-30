@@ -2,6 +2,8 @@
 using TaskManagement.Application.Services;
 using TaskManagement.Domain.Business;
 using TaskManagement.Domain.Interfaces.Business;
+using TaskManagement.Domain.Interfaces.Repository;
+using TaskManagement.Infrastructure.Repository;
 
 namespace TaskManagement.API.ServicesExtensions
 {
@@ -22,7 +24,8 @@ namespace TaskManagement.API.ServicesExtensions
         }
 
         public static IServiceCollection AddRepository(this IServiceCollection services)
-        {           
+        {
+            services.AddScoped<IBaseRepository, BaseRepository>();
 
             return services;
         }
