@@ -1,12 +1,21 @@
+using TaskManagement.API.MappingProfiles;
+using TaskManagement.API.ServicesExtensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.WorkUnit();
+builder.Services.AddRepository();
+builder.Services.AddBusiness();
+builder.Services.AddServices();
+builder.Services.AddControllers();
+builder.Services.AddLogging();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.ConfigureSwagger();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
