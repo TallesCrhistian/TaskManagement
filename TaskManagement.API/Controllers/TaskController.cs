@@ -37,7 +37,7 @@ namespace TaskManagement.API.Controllers
         }
 
         /// <summary>
-        /// Busca uma Tarefa com base no Id<paramref name="id"/>.
+        /// Busca uma Tarefa com base no <paramref name="id"/>.
         /// </summary>
         /// <param name="id">Filtro para buscar uma Tarefa.</param>
         /// <returns>Um objeto <see cref="IActionResult"/> que representa o resultado da operação.</returns>

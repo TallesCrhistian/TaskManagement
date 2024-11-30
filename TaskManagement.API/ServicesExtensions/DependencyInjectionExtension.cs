@@ -26,12 +26,14 @@ namespace TaskManagement.API.ServicesExtensions
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
             services.AddScoped<IBaseRepository, BaseRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
 
             return services;
         }
 
         public static IServiceCollection WorkUnit(this IServiceCollection services)
-        {            
+        {
+            services.AddScoped<IWorkUnit, WorkUnit>();
 
             return services;
         }

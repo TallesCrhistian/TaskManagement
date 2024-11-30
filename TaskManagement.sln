@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Infrastructure", "TaskManagement.Infrastructure\TaskManagement.Infrastructure.csproj", "{6BCFA984-1722-4D63-A943-280A0395D2A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Utils", "TaskManagement.Utils\TaskManagement.Utils.csproj", "{3C9D68CE-361B-48B4-A24B-7ECB724EA151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Utils", "TaskManagement.Utils\TaskManagement.Utils.csproj", "{3C9D68CE-361B-48B4-A24B-7ECB724EA151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

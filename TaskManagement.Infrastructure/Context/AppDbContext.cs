@@ -18,6 +18,6 @@ namespace TaskManagement.Infrastructure.Context
          
         }
 
-        public DbSet<TaskEntity> Tarefas { get; set; }
+        public DbSet<TaskEntity> TaskEntities { get; set; }
     }
 }
