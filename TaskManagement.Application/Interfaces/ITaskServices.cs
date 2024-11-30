@@ -13,6 +13,6 @@ namespace TaskManagement.Application.Interfaces
 
         Task<ServiceResponseDTO<TaskViewModel>> Delete(Guid id);
 
-        Task<ServiceResponseDTO<List<TaskViewModel>>> List(TaskFilterViewModel taskFilterViewModel, int pageForIndex);
+        Task<ServiceResponseDTO<ListResponseDTO<TaskViewModel>>> List(TaskFilterViewModel taskFilterViewModel, int pageForIndex);
     }
 }

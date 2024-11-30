@@ -104,7 +104,7 @@ namespace TaskManagement.API.Controllers
         [HttpGet]
         public async Task<IActionResult> List([FromQuery] TaskFilterViewModel taskFilterViewModel, [FromQuery] int pageIndex)
         {
-            ServiceResponseDTO<List<TaskViewModel>> serviceResponseViewModel = await this._iTaskServices.List(taskFilterViewModel, pageIndex);
+            ServiceResponseDTO<ListResponseDTO<TaskViewModel>> serviceResponseViewModel = await this._iTaskServices.List(taskFilterViewModel, pageIndex);
 
             return this.StatusCode(serviceResponseViewModel.StatusCode, serviceResponseViewModel);
         }

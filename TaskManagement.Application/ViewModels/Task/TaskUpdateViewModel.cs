@@ -10,6 +10,8 @@ namespace TaskManagement.Application.ViewModels.Task
 
         public string? Description { get; set; }
 
-        public EnumTaskStatus Status { get; set; }      
+        public EnumTaskStatus Status { get; set; }
+
+        public DateTime?  UpdatedAt { get; set; }
     }
 }

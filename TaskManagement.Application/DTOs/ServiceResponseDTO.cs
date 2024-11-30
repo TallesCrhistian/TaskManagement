@@ -1,4 +1,4 @@
-﻿using TaskManagement.Application.Messages;
+﻿using TaskManagement.Utils.Messages;
 
 namespace TaskManagement.Application.DTOs
 {
@@ -8,7 +8,7 @@ namespace TaskManagement.Application.DTOs
 
         public bool Sucess { get; set; } = true;
 
-        public string Message { get; set; } = GenericMessages.OkMessage;
+        public string Message { get; set; } = Messages.OkMessage;
 
         public int StatusCode { get; set; }
     }
