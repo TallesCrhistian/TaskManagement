@@ -10,6 +10,6 @@ namespace TaskManagement.Application.DTOs
 
         public string Message { get; set; } = Messages.OkMessage;
 
-        public int StatusCode { get; set; }
+        public int StatusCode { get; set; } = 200;
     }
 }

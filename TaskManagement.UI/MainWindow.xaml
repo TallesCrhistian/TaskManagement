@@ -1,0 +1,33 @@
+﻿<Window x:Class="TaskManagement.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManagement.UI"
+        mc:Ignorable="d"
+        Title="Gereciador de Tarefas" Height="450" Width="800">
+    <Grid>
+        <!-- Definindo uma linha e uma coluna que ocuparão todo o espaço disponível -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- StackPanel para alinhar os botões horizontalmente no centro -->
+        <StackPanel Orientation="Horizontal" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Margin="20">
+            <Button Content="Ver Tarefas" 
+                Width="152" Height="52" 
+                Click="OnListTasksClick"
+                    Margin="40"/>
+            <Button Content="Criar Tarefa" 
+                Width="152" Height="52" 
+                Click="OnCreateTaskClick" />
+        </StackPanel>
+    </Grid>
+</Window>

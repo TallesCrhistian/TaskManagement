@@ -2,7 +2,7 @@
 {
     public class ConfigurationHelper
     {
-        private const int DefaultItemsPerPage = 10;
+        private const int DefaultItemsPerPage = 100;
 
         public static int GetItemsPerPage()
         {

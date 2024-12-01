@@ -99,7 +99,7 @@ namespace TaskManagement.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ServiceResponseDTO<TaskViewModel>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ServiceResponseDTO<TaskViewModel>))]       
-        [HttpGet]
+        [HttpGet(nameof(List))]
         public async Task<IActionResult> List([FromQuery] TaskFilterViewModel taskFilterViewModel, [FromQuery] int pageIndex)
         {
             ServiceResponseDTO<ListResponseDTO<TaskViewModel>> serviceResponseViewModel = await this._iTaskServices.List(taskFilterViewModel, pageIndex);

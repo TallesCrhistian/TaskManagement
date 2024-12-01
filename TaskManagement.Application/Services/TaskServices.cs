@@ -169,8 +169,7 @@ namespace TaskManagement.Application.Services
 
                 TaskEntity taskEntity = await _iBaseRepository.Delete<TaskEntity>(id);
 
-                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(taskEntity);
-                serviceResponseDTO.StatusCode = StatusCodes.Status201Created;
+                serviceResponseDTO.GenericData = _iMapper.Map<TaskViewModel>(taskEntity);                
 
                 await this._iWorkUnit.SaveChangesAsync();
                 await this._iWorkUnit.CommitAsync();
@@ -216,7 +215,7 @@ namespace TaskManagement.Application.Services
                     TotalPages = await GetTotalPages(taskEntity),
                 };
 
-                serviceResponseDTO.GenericData = dataResponse;               
+                serviceResponseDTO.GenericData = dataResponse;                
             }
             catch (CustomException ex)
             {
