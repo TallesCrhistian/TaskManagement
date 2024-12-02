@@ -119,11 +119,11 @@ namespace TaskManagement.Application.Services
 
             try
             {
-                TaskDTO oldTaskDTO =  await ValidateIfTaskExistsAsync(taskUpdateViewModel.Id);
-
                 TaskDTO taskDTO = _iMapper.Map<TaskDTO>(taskUpdateViewModel);
 
                 ValidateTitle(taskDTO);
+
+                TaskDTO oldTaskDTO =  await ValidateIfTaskExistsAsync(taskUpdateViewModel.Id);               
 
                 TaskEntity newTaskEntity = _iMapper.Map<TaskEntity>(taskDTO);
                 TaskEntity oldTaskEntity = _iMapper.Map<TaskEntity>(oldTaskDTO);
@@ -247,7 +247,7 @@ namespace TaskManagement.Application.Services
             TaskEntity taskEntity = await _iBaseRepository.Read<TaskEntity>(id);
 
             return taskEntity is not null ? _iMapper.Map<TaskDTO>(taskEntity)
-               : throw new CustomException(HttpStatusCode.BadRequest, Messages.NotFound(EntityName), new HttpRequestException());
+               : throw new CustomException(HttpStatusCode.NotFound, Messages.NotFound(EntityName), new HttpRequestException());
         }
 
         private async Task<int> GetTotalPages(TaskEntity taskEntity)
