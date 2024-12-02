@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using TaskManagement.UI.Entities;
 using TaskManagement.UI.Enumerators;
 using TaskManagement.UI.Services;
 using TaskManagement.UI.ViewModels;
@@ -19,20 +7,41 @@ using TaskManagement.UI.ViewModels;
 namespace TaskManagement.UI.TaskUI
 {
     /// <summary>
-    /// Lógica interna para CreateTaskUI.xaml
+    /// Interaction logic for UpdateTaskUI.xaml
     /// </summary>
-    public partial class CreateTaskUI : Window
+    public partial class UpdateTaskUI : Window
     {
-        public CreateTaskUI()
+        private TaskViewModel _taskViewModel;
+
+        public UpdateTaskUI(TaskViewModel taskViewModel)
         {
             InitializeComponent();
 
-            this.WindowState = WindowState.Maximized;                  
+            this.WindowState = WindowState.Maximized;
+
+            this._taskViewModel = taskViewModel;
+
+            LoadValues();
         }
 
         private const string BaseUrl = "https://localhost:7174/api/Task";
 
-        private async void OnSaveButtonClick(object sender, RoutedEventArgs e)
+        private void LoadValues()
+        {
+            txtTitle.Text = _taskViewModel.Title;
+            txtDescription.Text = _taskViewModel.Description;
+            dpCreatedAt.Value = _taskViewModel.CreatedAt;
+            dpCompletedAt.Value = _taskViewModel.UpdatedAt;
+            cmbStatus.SelectedIndex = (int)_taskViewModel.Status;
+
+            if (_taskViewModel.Status != EnumTaskStatus.Completed)
+            {
+                txtCompleteAt.Visibility = Visibility.Hidden;
+                dpCompletedAt.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private async void OnUpdateButtonClick(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -48,8 +57,9 @@ namespace TaskManagement.UI.TaskUI
                     return;
                 }
 
-                var newTask = new TaskCreateViewModel
+                var newTask = new TaskUpdateViewModel
                 {
+                    Id = _taskViewModel.Id,
                     Title = txtTitle.Text,
                     Description = txtDescription.Text,
                     CreatedAt = dpCreatedAt.Value.Value,
@@ -59,13 +69,11 @@ namespace TaskManagement.UI.TaskUI
 
                 ApiService apiService = new ApiService();
 
-                await apiService.PostAsync<TaskViewModel, TaskCreateViewModel>(BaseUrl, newTask);
+                await apiService.PutAsync<TaskViewModel, TaskUpdateViewModel>(BaseUrl, newTask);
 
-                MessageBox.Show($"Task criada com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Task atualizada com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                txtTitle.Clear();
-                txtDescription.Clear();
-                cmbStatus.SelectedIndex = -1;
+                this.Close();
             }
             catch
             {

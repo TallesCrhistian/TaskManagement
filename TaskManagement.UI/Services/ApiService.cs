@@ -7,9 +7,7 @@
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using TaskManagement.UI.DTOs;
-    using TaskManagement.UI.Entities;
-    using TaskManagement.UI.ViewModels;
-
+  
     public class ApiService
     {
         private readonly HttpClient _httpClient;
@@ -77,9 +75,32 @@
 
                 return responseObject;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception($"Erro ao consumir a API: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<TResponse> PutAsync<TResponse, TRequest>(string url, TRequest requestData)
+        {
+            try
+            {
+                var jsonRequest = JsonConvert.SerializeObject(requestData);
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PutAsync(url, content);
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                response.EnsureSuccessStatusCode();
+
+                TResponse responseObject = JsonConvert.DeserializeObject<TResponse>(responseBody);
+
+                return responseObject;
+            }
+            catch
+            {
+                throw;
             }
         }
 
@@ -100,14 +121,10 @@
                 
                 return result;
             }
-            catch (HttpRequestException httpRequestException)
-            {                
-                throw new Exception("Erro ao realizar a requisição DELETE.", httpRequestException);
-            }
-            catch (Exception ex)
-            {                
-                throw new Exception("Erro ao processar a resposta da API.", ex);
-            }
+            catch
+            {
+                throw;
+            }          
         }
     }
 }

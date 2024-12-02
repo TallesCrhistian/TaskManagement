@@ -25,7 +25,7 @@ namespace TaskManagement.UI.TaskUI
             GetAll();
         }
 
-        private const string BaseUrl = "http://localhost:5196/api/Task";
+        private const string BaseUrl = "https://localhost:7174/api/Task";
 
         private async void OnFilterClick(object sender, RoutedEventArgs e)
         {
@@ -49,7 +49,7 @@ namespace TaskManagement.UI.TaskUI
 
         private async Task GetAll()
         {
-            var tasks = await apiService.GetListAsync<TaskViewModel, TaskFilterViewModel>(new TaskFilterViewModel() { Status = EnumTaskStatus.Pending }, 1, BaseUrl);
+            var tasks = await apiService.GetListAsync<TaskViewModel, TaskFilterViewModel>(new TaskFilterViewModel(), 1, BaseUrl);
 
             dataGridTarefas.ItemsSource = tasks.GenericData.Data;
         }
@@ -57,11 +57,16 @@ namespace TaskManagement.UI.TaskUI
         private void OnEditClick(object sender, RoutedEventArgs e)
         {            
             Button button = sender as Button;
-            var task = button?.DataContext as TaskEntity;
+            var task = button?.DataContext as TaskViewModel;
+
             if (task != null)
             {                
-                MessageBox.Show($"Editing task: {task.Title}");
+                UpdateTaskUI updateTaskUI = new UpdateTaskUI(task);
+
+                updateTaskUI.ShowDialog();
             }
+
+            this.Close();
         }
 
         private async void OnDeleteClick(object sender, RoutedEventArgs e)
