@@ -35,8 +35,7 @@ Se esses comandos retornarem suas respectivas versões, você está pronto para 
 Clone o repositório para a sua máquina local:
 
 ```bash
-git clone https://github.com/TallesCrhistian/Auditoria.git
-cd auditoria-api
+git clone https://github.com/TallesCrhistian/TaskManagement.git
 ````
 
 ### 2. Executar o Docker Compose
