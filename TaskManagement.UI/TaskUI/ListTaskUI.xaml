@@ -6,56 +6,96 @@
         xmlns:local="clr-namespace:TaskManagement.UI.TaskUI"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Tarefas" Height="450" Width="816">
-    <Grid>
+        Title="Tarefas" Height="500" Width="850"
+        Background="#F8F9FA"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#0078D7" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="70" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#E0E0E0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="RowHeight" Value="40" />
+            <Setter Property="ColumnHeaderHeight" Value="40" />
+            <Setter Property="GridLinesVisibility" Value="Horizontal" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.Row="0" Margin="5">
-            <Label Content="Título:" VerticalAlignment="Center"/>
-            <TextBox Name="txtTitleFilter" Width="150" Margin="5" HorizontalAlignment="Left"/>
+        <Border Background="White" 
+                CornerRadius="8" 
+                Padding="10" 
+                Margin="0,0,0,10"
+                BorderBrush="#E0E0E0" 
+                BorderThickness="1"
+                Grid.Row="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Label Content="Título:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0"/>
+                <TextBox Name="txtTitleFilter" Width="150" Margin="5" />
 
-            <Label Content="Descrição:" VerticalAlignment="Center"/>
-            <TextBox Name="txtDescriptionFilter" Width="150" Margin="5" HorizontalAlignment="Left"/>
+                <Label Content="Descrição:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0"/>
+                <TextBox Name="txtDescriptionFilter" Width="150" Margin="5" />
 
-            <Label Content="Status:" VerticalAlignment="Center"/>
-            <ComboBox Name="cmbStatusFilter" Width="150" Margin="5" HorizontalAlignment="Left">
-                <ComboBoxItem Content="Pending"/>
-                <ComboBoxItem Content="InProgress"/>
-                <ComboBoxItem Content="Completed"/>
-            </ComboBox>
+                <Label Content="Status:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0"/>
+                <ComboBox Name="cmbStatusFilter" Width="150" Margin="5">
+                    <ComboBoxItem Content="Pending" />
+                    <ComboBoxItem Content="InProgress" />
+                    <ComboBoxItem Content="Completed" />
+                </ComboBox>
 
-            <TextBlock Text="Criado em:" VerticalAlignment="Center" />
-            <xctk:DateTimePicker Name="dpCreatedAtFilter" Width="150" Margin="5" HorizontalAlignment="Left" />
+                <TextBlock Text="Criado em:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0"/>
+                <xctk:DateTimePicker Name="dpCreatedAtFilter" Width="150" Margin="5" />
 
-            <TextBlock Text="Atualizado em:" VerticalAlignment="Center" />
-            <xctk:DateTimePicker Name="dpUpdatedAtFilter" Width="150" Margin="5" HorizontalAlignment="Left" />
+                <TextBlock Text="Atualizado em:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0"/>
+                <xctk:DateTimePicker Name="dpUpdatedAtFilter" Width="150" Margin="5" />
 
-            <Button Content="Filtrar" Width="100" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" Click="OnFilterClick"/>
-        </StackPanel>
+                <Button Content="Filtrar" Click="OnFilterClick" />
+            </StackPanel>
+        </Border>
 
-        <DataGrid Name="dataGridTarefas" AutoGenerateColumns="False" Margin="5" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <DataGrid Name="dataGridTarefas" AutoGenerateColumns="False" Margin="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Título" Binding="{Binding Title}" Width="2*" IsReadOnly="True" />
-
                 <DataGridTextColumn Header="Descrição" Binding="{Binding Description}" Width="2*" IsReadOnly="True" />
-              
-                <DataGridTextColumn Header="Data de Criação" Binding="{Binding UpdatedAt, StringFormat='dd/MM/yyyy'}" Width="1*" IsReadOnly="True" />
-
-                <DataGridTextColumn Header="Data de Conclusão" Binding="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}" Width="1*" IsReadOnly="True" />
-
+                <DataGridTextColumn Header="Data de Criação" Binding="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Header="Data de Conclusão" Binding="{Binding UpdatedAt, StringFormat='dd/MM/yyyy'}" Width="1*" IsReadOnly="True" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" IsReadOnly="True" />
 
-                <DataGridTemplateColumn Header="Ações" Width="Auto">
+                <DataGridTemplateColumn Header="Ações" Width="Auto" MinWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                             
-                                <Button Content="Editar" Width="60" Margin="5" Click="OnEditClick" />
-
-                                <Button Content="Excluir" Width="60" Margin="5" Click="OnDeleteClick" />
+                                <Button Content="Editar" Click="OnEditClick" />
+                                <Button Content="Excluir" Click="OnDeleteClick" Background="#FF5733" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -64,5 +104,3 @@
         </DataGrid>
     </Grid>
 </Window>
-
-

@@ -5,9 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManagement.UI"
         mc:Ignorable="d"
-        Title="Gereciador de Tarefas" Height="450" Width="800">
+        Title="Gerenciador de Tarefas" Height="450" Width="800"
+        Background="#F0F4F8"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>       
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#0078D7" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Height" Value="52" />
+            <Setter Property="Width" Value="152" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <!-- Definindo uma linha e uma coluna que ocuparão todo o espaço disponível -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -15,19 +42,31 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <!-- StackPanel para alinhar os botões horizontalmente no centro -->
-        <StackPanel Orientation="Horizontal" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
-                Margin="20">
-            <Button Content="Ver Tarefas" 
-                Width="152" Height="52" 
-                Click="OnListTasksClick"
-                    Margin="40"/>
-            <Button Content="Criar Tarefa" 
-                Width="152" Height="52" 
-                Click="OnCreateTaskClick" />
+    
+        <TextBlock Text="Gerenciador de Tarefas"
+                   FontSize="24" 
+                   FontWeight="Bold"
+                   Foreground="#333"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,20,0,0"/>
+      
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="20">
+            <Button Content="Ver Tarefas"
+                    Click="OnListTasksClick" />
+            <Button Content="Criar Tarefa"
+                    Background="#28A745"
+                    Click="OnCreateTaskClick" />
         </StackPanel>
+
+        <TextBlock Text="© 2024 TaskManagement Inc."
+                   FontSize="12"
+                   Foreground="#666"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,10" />
     </Grid>
 </Window>
